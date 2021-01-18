@@ -20,8 +20,25 @@ def cd(directory):
     except FileNotFoundError:
         print("Incorrect file directory")
 
-def rm(path):
-    return
+def mkdir(path):
+    try:
+        os.mkdir(path)
+    except FileNotFoundError:
+        print("File Already Exists")
+    except FileExistsError:
+        print("File Already Exists")
+
+def rm(path, mode):
+    if mode == "dir":
+        os.rmdir(path)
+    elif mode == "file":
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            print("File does not exist exists")
+
+
+#MISC
 
 commandList = ["ls", "pwd", "whoami", "cd", "ls"]
 def cmdlist():
@@ -33,3 +50,4 @@ def commandCheck():
         pwd()
         whoami()
 commandCheck()
+rm("./hello.txt", "file")
