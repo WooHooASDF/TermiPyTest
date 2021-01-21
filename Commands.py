@@ -1,24 +1,29 @@
 import os
+import shutil
+
 
 def ls():
     dirs = os.listdir()
     for obj in dirs:
         print(f"    {obj}")
 
+
 def pwd():
     return os.getcwd()
+
 
 def whoami():
     return os.getlogin()
 
+
 def cd(directory):
     try:
         os.chdir(str(directory))
-        currentDir = directory
     except PermissionError:
         print("Access Denied")
     except FileNotFoundError:
         print("Incorrect file directory")
+
 
 def mkdir(path):
     try:
@@ -28,9 +33,10 @@ def mkdir(path):
     except FileExistsError:
         print("File Already Exists")
 
+
 def rm(path, mode):
     if mode == "dir":
-        os.rmdir(path)
+        shutil.rmtree(path)
     elif mode == "file":
         try:
             os.remove(path)
@@ -38,16 +44,15 @@ def rm(path, mode):
             print("File does not exist exists")
 
 
-#MISC
+# MISC
 
 commandList = ["ls", "pwd", "whoami", "cd", "ls"]
-def cmdlist():
+
+
+def cmd_list():
     return commandList
 
-def commandCheck():
-    if __name__ == "__main__":
-        ls()
-        pwd()
-        whoami()
-commandCheck()
-rm("./hello.txt", "file")
+
+
+# commandCheck()
+# rm("./hello.txt", "file")
